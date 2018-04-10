@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+  version="2.0">
+  
+  <description>JSTL 1.1 functions library</description>
+  <display-name>JSTL functions sys</display-name>
+  <tlib-version>1.1</tlib-version>
+  <short-name>my</short-name>
+  <uri>http://java.sun.com/jsp/jstl/functionss</uri>
+
+  <!-- 用户 -->
+  <function>
+    <description>根据登录名获取用户</description>
+    <name>getUserByLoginName</name>
+    <function-class>com.cbmie.genMac.utils.MyTagUtils</function-class>
+    <function-signature>com.cbmie.system.entity.User getUserByLoginName(java.lang.String)</function-signature>
+    <example>${my:getUserByLoginName(loginName)}</example>
+  </function>
+  
+  <function>
+    <description>判断用户是否有指定权限</description>
+    <name>shiro</name>
+    <function-class>com.cbmie.genMac.utils.MyTagUtils</function-class>
+    <function-signature>java.lang.Boolean shiro(java.lang.String, java.lang.String)</function-signature>
+    <example>${my:shiro(loginName, permCode)}</example>
+  </function>
+  
+  <!-- 关联单位 -->
+  <function>
+    <description>根据id获取关联单位</description>
+    <name>getAffiliatesById</name>
+    <function-class>com.cbmie.genMac.utils.MyTagUtils</function-class>
+    <function-signature>com.cbmie.genMac.baseinfo.entity.AffiBaseInfo getAffiliatesById(java.lang.String)</function-signature>
+    <example>${my:getAffiliatesById(id)}</example>
+  </function>
+  
+  <!-- 字典值 -->
+  <function>
+    <description>据多选的字符串和字典值返回 多个字符串对应的值</description>
+    <name>getDict</name>
+    <function-class>com.cbmie.genMac.utils.MyTagUtils</function-class>
+    <function-signature>java.lang.String getDict(java.lang.String, java.lang.String)</function-signature>
+    <example>${my:getDict(types, dict)}</example>
+  </function>
+  
+</taglib>

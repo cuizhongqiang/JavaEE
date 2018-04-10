@@ -1,0 +1,40 @@
+body {
+	padding-top: 10px;
+	background-color: #eee;
+	text-align: center;
+}
+
+.form-box {
+	padding-top: 40px;
+}
+
+.form-top {
+	overflow: hidden;
+	padding-left: 10px;
+	-moz-border-radius: 4px 4px 0 0;
+	-webkit-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0;
+	text-align: left;
+}
+
+.form-top-left {
+	float: left;
+	padding-top: 10px;
+}
+
+.form-top-left h3 {
+	margin-top: 0;
+}
+
+.form-top-right {
+	float: left;
+	padding-top: 10px;
+	padding-right: 10px;
+	font-size: 24px;
+	color: #286090;
+}
+
+.form-bottom {
+	padding: 20px;
+	text-align: left;
+}
