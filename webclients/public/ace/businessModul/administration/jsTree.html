@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+</head>
+<body>
+
+<div id="treeDemo"></div>
+<button>切换</button>
+<script>
+//    $('#treeDemo').data('jstree', false).empty();
+
+    $('#treeDemo').jstree({
+        // 引入插件
+        'plugins': [ 'types', 'themes', 'contextmenu',"dnd"],
+        'types': {
+            'default': {
+                'icon': false  // 删除默认图标
+            },
+        },
+        'core': {
+            "themes" : {
+                "theme": "classic",
+                "dots": true,
+                "icons": false
+            },
+            'multiple': true,  // 可否多选
+
+
+            'data':  function (obj,callback) {
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://192.168.31.10:5001/configCenters/orgStructureData",
+                    dataType:"json",
+                    success: function (data) {
+
+                        console.log(data.content);
+                        callback.call(this,JSON.parse(data.content));
+
+                    }
+
+                });
+
+
+            } ,  // 生成节点的数据，nodeData是后台返回的JSON数据
+            'check_callback': function (operation, node, parent, position, more) {
+
+
+
+//                if(operation === 'create_node'){
+//                    console.log(parent.text);
+//                    console.log('create测试');
+//                }
+//
+//                if (operation === 'delete_node') {
+//                    console.log(node.text);
+//                    console.log(position);
+//                    console.log('delete测试');
+//                }
+//                if (operation === 'rename_node') {
+//                    //console.log(parent.text);
+//                    console.log(position);
+//                    console.log(node.text);
+//                    console.log('rename测试');
+//                }
+//                console.log('测试区域');
+                return true;
+
+            }
+        }
+    }) ;
+
+
+
+//    $('#treeDemo').on("create_node.jstree", function(node, parent,position) {
+//
+//
+//
+//    }) ; //触发事件
+//
+//    $('#treeDemo').on("rename_node.jstree", function(node, text,old) {
+//
+//        console.log(node);
+//        console.log(text);
+//        console.log(old);
+//
+//    }) ;
+
+
+
+     $("button").click(function(){
+         var v = $('#treeDemo').jstree(true).get_json('#', {flat:true})
+         var mytext = JSON.stringify(v);
+         console.log(mytext);
+     });
+
+
+</script>
+
+</body>
+</html>

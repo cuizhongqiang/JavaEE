@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://cdn.bootcss.com/angular.js/1.6.6/angular.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/index.css"/>
+<title>flowable demo</title>
+</head>
+<body ng-app="myApp">
+  <div>
+    <ul id="loginForm" ng-controller="myController">
+      <li>用户名：<input type="text" name="username" ng-model="username" /></li>
+      <li>密　码：<input type="password" name="password" ng-model="password" /></li>
+      <li id="loginBtn"><input type="button" value="提交" ng-click="submit()"/> <input type="button" value="重置" ng-click="resetInfo()"/></li>
+	  <div>{{msg}}</div>
+    </ul>
+  </div>
+<script>
+var myApp = angular.module("myApp", [])
+myApp.controller("myController", function($scope,$http,$window) {
+  $scope.resetInfo=function()
+  {
+    $scope.username="";
+    $scope.password="";
+  }
+  $scope.submit=function()
+  {
+    var url = "/login?username="+$scope.username+"&"+"password="+$scope.password;
+    $http.post(url).then(function(response) {
+    	var rspData = response.data;
+    	var code = rspData.code;
+    	var content = rspData.content;
+    	var result = rspData.result;
+    	if (result == 'true') {
+    		$window.location.href = 'task.start.html';
+    	} else {
+    		$scope.msg = response.data.content;
+    	}
+    }, function(response) {
+		$scope.msg = response.data.error;
+    });
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="page-header">
+            <h1>
+                Shiro配置管理
+            </h1>
+        </div><!-- /.page-header -->
+
+        <div class="row" style="margin-left: 5px;margin-right: 5px">
+
+            <div class="container">
+                <form id="mainForm" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="loginUrl">登录URL</label>
+                        <input type="text" class="form-control" id="loginUrl" placeholder="登录URL" name="loginUrl" ng-model="loginUrl">
+                    </div>
+                    <div class="form-group">
+                        <label for="successUrl">登录成功URL</label>
+                        <input type="text" class="form-control" id="successUrl" placeholder="登录成功URL" name="successUrl" ng-model="successUrl">
+                    </div>
+                    <div class="form-group">
+                        <label for="unauthorizedUrl">无访问权限URL</label>
+                        <input type="text" class="form-control" id="unauthorizedUrl" placeholder="登录成功URL" name="unauthorizedUrl" ng-model="unauthorizedUrl">
+                    </div>
+                    <div class="form-group" id="filterChain">
+                        <label>过滤器链 <a class="glyphicon glyphicon-plus" onclick="appendFilterChain();"></a></label>
+                        <div ng-repeat="(x, y) in filterChain">
+                            <div class="form-inline" style="margin-bottom: 5px;">
+                                <input type="text" class="form-control" name="filterConfigKey" value="{{x}}"> - <input type="text" class="form-control" name="filterConfigValue" value="{{y}}">
+                                <a class="glyphicon glyphicon-minus" onclick="romoveFilterChain($(this));"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-lg btn-info btn-block" type="button" ng-click="shiroConfigSubmit()">保存</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div><!-- /.col -->
+</div><!-- /.row -->
+<script type="text/javascript">
+    function appendFilterChain() {
+        $('#filterChain').append(
+            "<div class='form-inline' style='margin-bottom: 5px;'>"
+            + "<input type='text' class='form-control' name='filterConfigKey'> - <input type='text' class='form-control' name='filterConfigValue'>"
+            + " <a class='glyphicon glyphicon-minus' onclick='romoveFilterChain($(this));'></a>"
+            + "</div>"
+        );
+    }
+    function romoveFilterChain(currentObj) {
+        currentObj.parent().remove();
+    }
+</script>
+
+
+

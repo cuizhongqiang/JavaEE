@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.bootcss.com/angular.js/1.6.6/angular.min.js"></script>
+    <style type="text/css" media="screen">
+        thead, tfoot {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+            background-color: blue;
+        }
+
+        table, th, td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #f1f1f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+    </style>
+    <title>Spring APIs</title>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="springapis">
+    <table>
+        <thead>
+        <td>BAPI_TEXT</td>
+        <td>ABAPNAME</td>
+        <td>BAPINAME</td>
+        </thead>
+        <tr ng-repeat="x in apis">
+            <td>{{x.BAPI_TEXT}}</td>
+            <td>{{x.ABAPNAME}}</td>
+            <td>{{x.BAPINAME}}</td>
+        </tr>
+        <tfoot>
+        <td>BAPI_TEXT</td>
+        <td>ABAPNAME</td>
+        <td>BAPINAME</td>
+        </tfoot>
+    </table>
+
+</div>
+
+<script>
+    var wsurl = "http://localhost:5010/bapi/list";
+    var app = angular.module('myApp', []);
+    app.controller('springapis', function ($scope, $http) {
+        $http.get(wsurl).then(function (result) {
+            var item = result.data.TABLES.BAPILIST.item;
+            //console.log(JSON.stringify(item));
+            $scope.apis = item;
+        });
+    });
+</script>
+</body>
+</html>

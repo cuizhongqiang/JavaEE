@@ -1,0 +1,15 @@
+#loginForm {
+	list-style-type: none;
+	background-color:#e9b96e;
+	width:300px;
+	height:150px;
+	padding-top:30px;
+	margin:0px auto 0px auto;
+}
+#loginForm li{
+ margin-top:5px;
+}
+#loginBtn
+{
+	text-align: center;
+}

@@ -1,0 +1,151 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 导入资源文件 -->
+	<bean id="propertyPlaceholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>config/db.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="processEngine" class="org.flowable.spring.ProcessEngineFactoryBean">
+		<property name="processEngineConfiguration" ref="processEngineConfiguration_spring" />
+	</bean>
+
+	<bean id="flowableRule" class="org.flowable.engine.test.Flowable">
+		<property name="processEngine" ref="processEngine" />
+	</bean>
+	<bean id="repositoryService" factory-bean="processEngine"
+		factory-method="getRepositoryService" />
+	<bean id="runtimeService" factory-bean="processEngine"
+		factory-method="getRuntimeService" />
+	<bean id="taskService" factory-bean="processEngine"
+		factory-method="getTaskService" />
+	<bean id="historyService" factory-bean="processEngine"
+		factory-method="getHistoryService" />
+	<bean id="managementService" factory-bean="processEngine"
+		factory-method="getManagementService" />
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource_druid2" />
+	</bean>
+
+	<bean id="processEngineConfiguration_spring" class="org.flowable.spring.SpringProcessEngineConfiguration">
+		<property name="deploymentResources" value="classpath*:/processes/*.bpmn,classpath*:/processes/*.xml" />
+		<property name="deploymentMode" value="single-resource" />
+		<property name="createDiagramOnDeploy" value="true" />
+		<property name="enableProcessDefinitionInfoCache" value="true" />
+		<property name="xmlEncoding" value="utf-8" />
+		<property name="dataSource" ref="dataSource_druid2" />
+		<property name="databaseSchemaUpdate" value="true" />
+		<property name="asyncExecutorActivate" value="false" />
+		<property name="mailServerHost" value="mail.my-corp.com" />
+		<property name="mailServerPort" value="5025" />
+	</bean>
+
+	<bean id="processEngineConfiguration"
+		class="org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+		<property name="dataSource" ref="dataSource_druid2" />
+		<property name="asyncExecutorActivate" value="false" />
+		<property name="databaseSchemaUpdate" value="create_drop" />
+		<property name="mailServerHost" value="mail.my-corp.com" />
+		<property name="mailServerPort" value="5025" />
+	</bean>
+
+	<bean id="dataSource_mysql" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="url"
+			value="jdbc:mysql://mysql.gateway.org:3306/cdwpworkflow?useSSL=false" />
+		<property name="username" value="appuser" />
+		<property name="password" value="123456" />
+		<property name="defaultAutoCommit" value="false" />
+	</bean>
+
+	<bean id="dataSource_h2"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="org.h2.Driver" />
+		<property name="url"
+			value="jdbc:h2:file:./.h2/testdb;DB_CLOSE_DELAY=1000" />
+		<property name="username" value="sa" />
+		<property name="password" value="sa" />
+	</bean>
+
+	<bean id="dataSource_druid2" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<!-- 基本属性 url、user、password -->
+		<property name="url"
+			value="jdbc:mysql://mysql.gateway.org:3306/cdwpworkflow?useCompression=true&amp;useServerPrepStmts=false&amp;rewriteBatchedStatements=true&amp;serverTimezone=Asia/Shanghai&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="username" value="appuser" />
+		<property name="password" value="123456" />
+
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="1" />
+		<property name="minIdle" value="1" />
+		<property name="maxActive" value="32" />
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="5000" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+
+		<property name="validationQuery" value="SELECT 'x'" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxOpenPreparedStatements" value="32" />
+		<property name="maxPoolPreparedStatementPerConnectionSize"
+			value="32" />
+
+		<!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
+		<property name="filters" value="stat" />
+	</bean>
+
+	<bean id="dataSource_druid" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${jdbc.mysql.jdbcUrl}" />
+		<property name="username" value="${jdbc.mysql.user}" />
+		<property name="password" value="${jdbc.mysql.password}" />
+
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="1" />
+		<property name="minIdle" value="1" />
+		<property name="maxActive" value="32" />
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="5000" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+
+		<property name="validationQuery" value="SELECT 'x'" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxOpenPreparedStatements" value="32" />
+		<property name="maxPoolPreparedStatementPerConnectionSize"
+			value="32" />
+
+		<!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
+		<property name="filters" value="stat" />
+	</bean>
+
+</beans>

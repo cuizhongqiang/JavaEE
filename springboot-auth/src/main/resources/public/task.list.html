@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.bootcss.com/angular.js/1.6.6/angular.min.js"></script>
+    <style type="text/css" media="screen">
+
+        table, th, td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #f1f1f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+		
+		thead, tfoot {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+            background-color: blue;
+			font-weight: bold;
+        }
+		
+		body{
+			font-size:12px;
+		}
+    </style>
+    <title>审批</title>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="springapis">
+    <table>
+        <thead>
+        <td>单据编号</td>
+        <td>单据类型</td>
+        <td>节点名称<td>
+        <td>审批状态</td>
+        </thead>
+        <!-- tr ng-repeat="x in apis">
+            <td>{{ x.className }}.{{ x.method }}()</td>
+            <td><a href="..{{ x.url }}">{{ x.url }}</a></td>
+            <td>{{ x.type }}</td>
+        </tr> -->
+        <tr ng-repeat="x in apis">
+            <td>{{ x.LIFNR }}</td>
+            <td>{{ x.LAND1 }}</td>
+            <td>{{ x.NAME1 }}</td>
+            <td>{{ x.NAME2 }}</td>
+        </tr>
+        <tfoot>
+			<td>单据编号</td>
+			<td>单据类型</td>
+			<td>节点名称<td>
+			<td>审批状态</td>
+        </tfoot>
+    </table>
+
+</div>
+
+<script>
+</script>
+</body>
+</html>

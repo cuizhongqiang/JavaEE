@@ -1,0 +1,32 @@
+
+<div class="row" ng-controller="paymentApplicationCtrl" style="margin-top: 20px;margin-left: 20px">
+    <div class="col-xs-9">
+        <!-- PAGE CONTENT BEGINS -->
+        <h4 class="header green clearfix">
+            审批申请
+        </h4>
+
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+
+                <div class="col-sm-9">
+                    <input  maxlength="5" placeholder="审批领导" onkeyup="value=value.replace(/[\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[\d]/g,''))"  ng-model = "starter" class="form-control"  />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <input maxlength="5" placeholder="单据号" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" ng-model="billCode" class="form-control" id="inputPersional"  />
+                </div>
+            </div>
+        </form>
+
+
+        <button style="margin-top: 10px;" type="button" ng-click="paymentSubmission()" class="btn btn-default">提交</button>
+    </div>
+
+</div><!-- /.row -->
+
+
+
+

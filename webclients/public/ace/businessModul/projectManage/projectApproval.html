@@ -1,0 +1,101 @@
+
+<div class="row" >
+    <div class="col-xs-12">
+        <div class="page-header">
+            <h1>
+                项目立项申请
+            </h1>
+        </div><!-- /.page-header -->
+    </div><!-- /.col -->
+
+    <div class="TabNav">
+        <ul class="generNav">
+            <li ng-class="{ 'active' : data.current == 1 }" ng-click="actions.setCurrent(1)"><a>项目基本信息</a></li>
+            <li ng-class="{ 'active' : data.current == 2 }" ng-click="actions.setCurrent(2)"><a>周杰伦</a></li>
+            <li ng-class="{ 'active' : data.current == 3 }" ng-click="actions.setCurrent(3)"><a>周杰伦</a></li>
+            <li ng-class="{ 'active' : data.current == 4 }" ng-click="actions.setCurrent(4)"><a>周杰伦</a></li>
+        </ul>
+        <div ng-if="data.current == 1">
+            <div class="row clearfix" style="margin-left: 20px">
+                <div class="col-md-12 column">
+
+                    <div class="page-header">
+                        <h4>
+                            项目立项申请
+                        </h4>
+                    </div><!-- /.page-header -->
+                    <form role="form">
+                        <div class="form-group col-xs-5">
+                            <label>我司单位：</label>
+                            <select name="approval_status" ng-model="approval_status" ng-init="approval_status='1'" id="spztChg" class="form-control">
+                                <option value="1">审批完成</option>
+                                <option value="2">审批中</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-5">
+                            <label>业务负责人：</label>
+                            <select name="approval_status" ng-model="approval_status" ng-init="approval_status='1'" id="spztChg" class="form-control">
+                                <option value="1">审批完成</option>
+                                <option value="2">审批中</option>
+                            </select>
+                        </div>
+                    </form>
+                    <form role="form">
+                        <div class="form-group col-xs-5">
+                            <label>品种：</label>
+                            <select name="approval_status" ng-model="approval_status" ng-init="approval_status='1'" id="spztChg" class="form-control">
+                                <option value="1">审批完成</option>
+                                <option value="2">审批中</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-5">
+                            <label>承建方：</label>
+                            <select name="approval_status" ng-model="approval_status" ng-init="approval_status='1'" id="spztChg" class="form-control">
+                                <option value="1">审批完成</option>
+                                <option value="2">审批中</option>
+                            </select>
+                        </div>
+                    </form>
+
+                    <form role="form">
+                        <div class="form-group col-xs-5">
+                            <label>详细地址：</label>
+                            <input  type="text" name="processid"  ng-init="processid=''" ng-model="processid" placeholder="详细地址" class="form-control">
+                        </div>
+                        <div class="form-group col-xs-5">
+                            <label>配送模式：</label>
+                            <select name="approval_status" ng-model="approval_status" ng-init="approval_status='1'" id="spztChg" class="form-control">
+                                <option value="1">审批完成</option>
+                                <option value="2">审批中</option>
+                            </select>
+                        </div>
+                    </form>
+                    <form role="form">
+                        <div class="form-group col-xs-5">
+                            <label>运费类别：</label>
+                            <select name="approval_status" ng-model="approval_status" ng-init="approval_status='1'" id="spztChg" class="form-control">
+                                <option value="1">审批完成</option>
+                                <option value="2">审批中</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-5">
+                            <label>合作利润分配方式：</label>
+                            <select name="approval_status" ng-model="approval_status" ng-init="approval_status='1'" id="spztChg" class="form-control">
+                                <option value="1">审批完成</option>
+                                <option value="2">审批中</option>
+                            </select>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+        <div ng-if="data.current == 2">红尘客栈、牛仔很忙、给我一首歌的时间、听妈妈的话</div>
+        <div ng-if="data.current == 3">被风吹过的夏天、江南、一千年以后</div>
+        <div ng-if="data.current == 4">十年、K歌之王、浮夸</div>
+    </div>
+</div><!-- /.row -->
+
+
+
