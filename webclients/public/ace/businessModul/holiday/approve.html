@@ -1,0 +1,70 @@
+
+<div class="page-content"  class="container">
+
+    <div class="page-header">
+        <h1>
+            假期审批
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row center">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            <div class="row">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table id="simple-table" class="table  table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>流程图查看</th>
+                                        <th>申请人</th>
+                                        <th>请假天数/天</th>
+                                        <th>请假原因</th>
+                                        <th>审批操作</th>
+
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr ng-repeat="x in obj">
+                                        <td>
+                                            <button ng-click="getImgByProcessId(x.processInstanceId)" class="btn btn-xs btn-success">
+                                                <i class="ace-icon fa fa-search-plus bigger-70"></i>
+                                            </button>
+                                        </td>
+                                        <td>{{x.variables.employee}}</td>
+                                        <td>{{x.variables.nrOfHolidays}}</td>
+                                        <td>{{x.variables.description}}</td>
+
+                                        <td>
+                                            <div class="hidden-sm hidden-xs btn-group">
+                                                <button ng-click="agree(x.taskId)" class="btn btn-xs btn-success">
+                                                    <i class="fa fa-thumbs-o-up"></i>
+                                                </button>
+
+                                                <button ng-click="refuse(x.taskId)" class="btn btn-xs btn-info">
+                                                    <i class="fa fa-thumbs-o-down"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div><!-- /.span -->
+                        </div><!-- /.row -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.row -->
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+
+
+
+

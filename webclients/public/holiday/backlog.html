@@ -1,0 +1,25 @@
+
+<div ng-controller="backlogCtrl">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>申请人</th>
+            <th>请假天数/天</th>
+            <th>请假原因</th>
+            <th>审批操作</th></tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="x in obj">
+            <td>{{x.variables.employee}}</td>
+            <td>{{x.variables.nrOfHolidays}}</td>
+            <td>{{x.variables.description}}</td>
+            <td>
+                <button ng-click="agree(x.taskId)" style="font-size:14px;border-radius: 4px">同意 <i class="fa fa-thumbs-o-up"></i></button>
+                <button ng-click="refuse(x.taskId)" style="font-size:14px;border-radius: 4px">拒绝 <i class="fa fa-thumbs-o-down"></i></button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>

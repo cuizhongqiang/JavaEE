@@ -1,0 +1,57 @@
+/**
+ common css   业务通用css样式
+
+ 注意： 业务级别的样式  加备注
+
+*/
+
+.genSearch{padding: 0px 30px 10px 30px;background: white;width: 100px}
+.genSearch table{width:100%;}
+.genSearch table td{width:50%; padding-bottom:20px;padding-right: 300px}
+.genSearch table td strong{float:left; background: white;  border-right:none; line-height:30px; text-align:left; padding:0 5px 0 0; width:266px; font-weight:normal; font-size:14px;}
+.genSearch table td input.text{float:left; border-radius: 4px;border:1px solid #ddd;background-color: white; width:366px;  padding:5px; line-height:20px;}
+.genSearch table td input.text[disabled]{float:left ;background-color: white; width:366px;  padding:5px; line-height:20px;}
+.genSearch table td select{float:left; background-color: white; width:366px; border:1px solid #ddd; padding:5px; line-height:20px;}
+.genSearch .minSelectIpt select { width: 80px;}
+.genSearch .minSelectIpt input.text { width: 186px;}
+.genSearch table td strong font { color:red;}
+.genSearch table .msgCon{height: 100px;}
+.genSearch table td textarea{float: left; background-color: white; width: 266px;height: 100px; max-height: 100px; max-width: 266px; border: 1px solid #ddd; padding: 5px; line-height: 20px;}
+.genSearch table .doctd{width: 100%;padding-bottom: 20px;}
+.ui-grid-menu-button{ height: 30px}
+
+
+.generNav{height:40px; overflow:hidden; zoom:1; background: #1c96fd;width: 80%}
+.generNav li{float:left;list-style-type:none;}
+.generNav li a{display:block; color:#fff; border-top:4px solid #4397d8; line-height:37px; font-size:16px; padding:0 40px;}
+.generNav li.active a{color:#e93f32; border-top:4px solid #ea3f35; background: #fbf9ed;}
+.selected {background-color: red;}
+.TabCon {margin-top: 50px}
+.font-lable {font-weight: 700}
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {vertical-align: middle;}
+
+/** mask **/
+.flyover .mask {
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background: black;
+    z-index: 1049;
+}
+.flyover .alert{
+    left: 50%;
+    top: 50%;
+    position: fixed;
+    z-index: 1050;
+}
+/* messageManage style */
+.manageMessage input{margin-right: 10px;float: left;}
+.manageMessage .fa{font-size: 17px;color: #5DC0E0;}
+.manageMessage .btn{padding: 3px 7px;border-radius: 10px;border: 0;}
+.manageMessage #messageList-table{border: 1px solid #ddd}
+.manageMessage .dataTables_wrapper .row:first-child{background: #fff}
+#messageList-table td h5{font-weight: bold}
+

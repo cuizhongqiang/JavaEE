@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>登录</title>
+    <!-- 设置文档编码 -->
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet" />
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.6/angular.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
+    <script src="lib/config.js"></script>
+</head>
+<body style="background-color:#90c9ff;">
+
+
+<div class="container" ng-app="loginApp" ng-controller="loginAppCtrl" style="background-color:white;margin-top: 100px;width: 500px;border-radius:5px">
+
+    <h1 class="page-header" style="font-size: 16px;text-align: center">登录界面</h1>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <form class="form-horizontal" role="form" style="width: 700px" id="form">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">用户名：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control"  placeholder="请输入用户名" id="inputEmail3" name="username" ng-model="username" />
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">密码：</label>
+                    <div class="col-sm-5">
+                        <input type="password" class="form-control" placeholder="请输入密码" id="inputPassword3" name="password" ng-model="password"/>
+                    </div>
+                </div>
+                <!--<div class="form-group">-->
+                    <!--<div class="col-sm-offset-2 col-sm-10">-->
+                        <!--<div class="checkbox">-->
+                            <!--<label><input type="checkbox" /> 记住我</label>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-default" ng-click="login()">登录</button>
+                        <button type="button" class="btn btn-default" ng-click="register()">注册</button>
+                    </div>
+
+                </div>
+                <p style="margin-left: 105px;font-size: 10px">推荐使用浏览器：Windows版<a target="_blank" href="/doc/ChromeStandalone_62.0.3202.62_Setup.exe">Chrome</a> Mac版<a target="_blank" href="http://rj.baidu.com/soft/detail/25718.html?ald">Chrome</a> </p>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('form').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            username: {
+                message: '用户名验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '用户名不能为空'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: '登录密码不能为空'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 6,
+                        message: '请输入6位登录密码'
+                    }
+                }
+            }
+        }
+    });
+    var app = angular.module('loginApp', ['ngRoute']).config(['$routeProvider', function($routeProvider){}]);
+
+    app.factory('dataService', ['$window', function ($window) {
+        return {        //存储单个属性
+            set: function (key, value) {
+                $window.localStorage[key] = value;
+            },        //读取单个属性
+            get: function (key, defaultValue) {
+                return $window.localStorage[key] || defaultValue;
+            },        //存储对象，以JSON格式存储
+            setObject: function (key, value) {
+                $window.localStorage[key] = JSON.stringify(value);//将对象以字符串保存
+            },        //读取对象
+            getObject: function (key) {
+                return JSON.parse($window.localStorage[key] || '{}');//获取字符串并解析成对象
+            }
+
+        }
+    }]);
+    //
+    app.controller('loginAppCtrl', function($scope,$http,dataService) {
+
+        $scope.login = function () {
+            if($scope.username && $scope.password){
+
+                $http.post(rootReqUrl + '/login?' + 'username=' + $scope.username + '&' + 'password=' + $scope.password).then(function successCallback(response) {
+                    // 请求成功执行代码
+                  if(response.data.result == 'true'){
+                      dataService.set("username",$scope.username);
+                      window.location = 'flowable.html';
+                  }else {
+                      alert('请输入正确用户名或密码！');
+                  }
+
+                }, function errorCallback(response) {
+                    // 请求失败执行代码
+                });
+            }else {
+                alert('请填写用户名+密码！');
+            }
+        };
+
+        $scope.register = function () {
+            //点击跳转注册页面
+            window.location = 'register.html';
+        };
+    });
+
+</script>
+</body>
+</html>

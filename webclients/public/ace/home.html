@@ -1,0 +1,156 @@
+<div ng-controller="homeCtrl" class="page-content"  class="container" ui-view>
+    <div class="ace-settings-container" id="ace-settings-container">
+        <div class="ace-settings-box clearfix" id="ace-settings-box">
+            <div class="pull-left width-50">
+                <div class="ace-settings-item">
+                    <div class="pull-left">
+                        <select id="skin-colorpicker" class="hide">
+                            <option data-skin="no-skin" value="#438EB9">#438EB9</option>
+                            <option data-skin="skin-1" value="#222A2D">#222A2D</option>
+                            <option data-skin="skin-2" value="#C6487E">#C6487E</option>
+                            <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+                        </select>
+                    </div>
+                    <span>&nbsp; Choose Skin</span>
+                </div>
+
+                <div class="ace-settings-item">
+                    <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-navbar" autocomplete="off" />
+                    <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
+                </div>
+
+                <div class="ace-settings-item">
+                    <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-sidebar" autocomplete="off" />
+                    <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
+                </div>
+
+                <div class="ace-settings-item">
+                    <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-breadcrumbs" autocomplete="off" />
+                    <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
+                </div>
+
+                <div class="ace-settings-item">
+                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" autocomplete="off" />
+                    <label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
+                </div>
+
+                <div class="ace-settings-item">
+                    <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-add-container" autocomplete="off" />
+                    <label class="lbl" for="ace-settings-add-container">
+                        Inside
+                        <b>.container</b>
+                    </label>
+                </div>
+            </div><!-- /.pull-left -->
+
+            <div class="pull-left width-50">
+                <div class="ace-settings-item">
+                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" autocomplete="off" />
+                    <label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
+                </div>
+
+                <div class="ace-settings-item">
+                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" autocomplete="off" />
+                    <label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
+                </div>
+
+                <div class="ace-settings-item">
+                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" autocomplete="off" />
+                    <label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
+                </div>
+            </div><!-- /.pull-left -->
+        </div><!-- /.ace-settings-box -->
+    </div><!-- /.ace-settings-container -->
+
+    <div class="page-header">
+        <h1>
+            流程定义管理
+            <!--<small>-->
+            <!--<i class="ace-icon fa fa-angle-double-right"></i>-->
+            <!--overview &amp; stats-->
+            <!--</small>-->
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            <div class="row">
+                <div class="space-6"></div>
+
+                <div class="widget-body">
+                    <div  style="margin-bottom: 5px;border:1px solid #F0F8FF;width: 300px;height: 30px">
+                        <input id="fileUpload" type="file" style="margin-top: 4px"/>
+                    </div>
+                    <button style="margin-right: 10px;margin-bottom: 5px" type="button" ng-click="uploadFile()" class="btn btn-default">批量上传流程定义文件</button>
+
+                    <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table id="simple-table" class="table  table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+
+
+                                        <th>id</th>
+                                        <th>deploymentId</th>
+                                        <th>key</th>
+                                        <th>version</th>
+                                        <th>name</th>
+                                        <th>graphicalNotationDefined</th>
+                                        <th>操作</th>
+
+
+
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr ng-repeat="x in data">
+                                        <td>
+                                            <a href="#">{{x.id}}</a>
+                                        </td>
+                                        <td>
+                                            <a href="#">{{x.deploymentId}}</a>
+                                        </td>
+                                        <td>{{x.key}}</td>
+                                        <td>{{x.version}}</td>
+                                        <td>{{x.name}}</td>
+                                        <td>{{x.graphicalNotationDefined}}</td>
+
+                                        <td>
+                                            <div class="hidden-sm hidden-xs btn-group">
+                                                <button ng-click="delete(x.key)" class="btn btn-xs btn-success">
+                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                </button>
+
+                                                <button ng-click="check(x.key)" class="btn btn-xs btn-info"><i class="ace-icon fa fa-pencil bigger-120"></i></button>
+
+                                                <!--<button class="btn btn-xs btn-danger">-->
+                                                <!--<i class="ace-icon fa fa-trash-o bigger-120"></i>-->
+                                                <!--</button>-->
+
+                                                <!--<button class="btn btn-xs btn-warning">-->
+                                                <!--<i class="ace-icon fa fa-flag bigger-120"></i>-->
+                                                <!--</button>-->
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div><!-- /.span -->
+                        </div><!-- /.row -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.row -->
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+</div><!-- /.page-content -->
+</div>

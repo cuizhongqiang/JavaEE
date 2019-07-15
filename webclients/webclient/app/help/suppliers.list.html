@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--  script src="https://cdn.bootcss.com/angular.js/1.6.6/angular.min.js"></script>-->
+    <script src="../../app/bower_components/angular/angular.js"></script>
+    <script src="../../node_modules/ng-table/bundles/ng-table.js"></script>
+    <link rel="stylesheet" href="../../node_modules/ng-table/bundles/ng-table.css">
+    <link rel="stylesheet" href="../../app/bower_components/bootstrap/dist/css/bootstrap.css">
+    <style type="text/css" media="screen">
+
+        table, th, td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #f1f1f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+		
+		thead, tfoot {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+            background-color: blue;
+			font-weight: bold;
+        }
+		
+		body{
+			font-size:12px;
+		}
+    </style>
+    <title>供应商主数据列表</title>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="springapis as sc">
+    <table ng-table="sc.tableParams" class="table table-bordered table-striped table-condensed">
+
+        <!-- tr ng-repeat="x in apis">
+            <td>{{ x.className }}.{{ x.method }}()</td>
+            <td><a href="..{{ x.url }}">{{ x.url }}</a></td>
+            <td>{{ x.type }}</td>
+        </tr> -->
+        <tr ng-repeat="row in $data track by row.LIFNR">
+            <td data-title="'供应商编号'" filter="{LIFNR: 'text'}" sortable="'LIFNR'">{{ row.LIFNR }}</td>
+            <td data-title="'国家代码'" filter="{LAND1: 'text'}" sortable="'LAND1'">{{ row.LAND1 }}</td>
+            <td data-title="'供应商名称1'" filter="{NAME1: 'text'}" sortable="'NAME1'">{{ row.NAME1 }}</td>
+            <td data-title="'供应商名称2'" filter="{NAME2: 'text'}" sortable="'NAME2'">{{ row.NAME2 }}</td>
+            <td data-title="'供应商简称'" filter="{SORTL: 'text'}" sortable="'SORTL'">{{ row.SORTL }}</td>
+            <td data-title="'省份编码'" filter="{REGIO: 'text'}" sortable="'REGIO'">{{ row.REGIO }}</td>
+            <td data-title="'城市'" filter="{ORT01: 'text'}" sortable="'ORT01'">{{ row.ORT01 }}</td>
+            <td data-title="'邮政编码'" filter="{PSTLZ: 'text'}" sortable="'PSTLZ'">{{ row.PSTLZ}}</td>
+            <td data-title="'详细地址'" filter="{STRAS: 'text'}" sortable="'STRAS'">{{ row.STRAS }}</td>
+            <td data-title="'电话'" filter="{TELF1: 'text'}" sortable="'TELF1'">{{ row.TELF1 }}</td>
+            <td data-title="'传真号'" filter="{TELFX: 'text'}" sortable="'TELFX'">{{ row.TELFX }}</td>
+            <td data-title="'税号'" filter="{STCD1: 'text'}" sortable="'STCD1'">{{ row.STCD1 }}</td>
+            <td data-title="'供应商账户组'" filter="{KTOKK: 'text'}" sortable="'KTOKK'">{{ row.KTOKK }}</td>
+            <td data-title="'创建日期'" filter="{ERDAT: 'text'}" sortable="'ERDAT'">{{ row.ERDAT }}</td>
+            <td data-title="'创建人'" filter="{ERNAM: 'text'}" sortable="'ERNAM'">{{ row.ERNAM }}</td>
+        </tr>
+        <tfoot>
+			<td>供应商编号</td>
+			<td>国家代码</td>
+			<td>供应商名称1</td>
+			<td>供应商名称2</td>
+			<td>供应商简称</td>
+			<td>省份编码</td>
+			<td>城市</td>
+			<td>邮政编码</td>
+			<td>详细地址</td>
+			<td>电话</td>
+			<td>传真号</td>
+			<td>税号</td>
+			<td>供应商账户组</td>
+			<td>创建日期</td>
+			<td>创建人</td>
+        </tfoot>
+    </table>
+
+</div>
+
+<script>
+	"use strict";
+    var wsurl = "http://localhost:5001/rest/supplier/list";
+    var app = angular.module('myApp', ['ngTable']);
+    app.controller('springapis', ['$scope', '$http','NgTableParams' ,function ($scope, $http, NgTableParams) {
+    	var self = this;
+        $http.get(wsurl).then(function (result) {
+            console.log(JSON.stringify(result.data));
+            var displayData = result.data.RESULT; 
+			self.tableParams = new NgTableParams({}, {
+				dataset:displayData
+			});
+        });
+    }]);
+</script>
+</body>
+</html>

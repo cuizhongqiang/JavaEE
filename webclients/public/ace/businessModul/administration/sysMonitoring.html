@@ -1,0 +1,263 @@
+
+
+<div class="row" >
+
+    <div class="col-sm-6">
+        <div class="widget-box">
+
+            <div class="widget-header widget-header-flat widget-header-small">
+                <h5 class="widget-title">
+                    <i class="ace-icon fa fa-signal"></i>
+                    服务器CPU占用
+                </h5>
+
+                <div class="widget-toolbar no-border">
+                <span class="grey">
+                    <span style="font-size: 13px"></span>	<span class="fa fa-angle-double-up bigger-190 green" style="margin-top: 5px"></span>
+																&nbsp;
+															</span>
+                </div>
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main">
+                    <div id="piechart-placeholder"></div>
+
+                    <div class="hr hr8 hr-double"></div>
+
+                    <div class="clearfix">
+                        <div class="grid3">
+															<span class="grey">
+                                                                 服务器状态
+																<i class="fa fa-angle-double-up bigger-190 green" style="margin-left: 20px"></i>
+																&nbsp;
+															</span>
+                        </div>
+
+                        <div class="grid3">
+															<span class="grey">
+																<i class="ace-icon fa fa-twitter-square fa-2x purple"></i>
+
+																&nbsp; redis   版本 ： {{redisVersion}}
+															</span>
+                        </div>
+
+                        <div class="grid3">
+															<span class="grey">
+																<i class="ace-icon fa fa-pinterest-square fa-2x red"></i>
+																&nbsp; db  {{db}}
+															</span>
+                        </div>
+                    </div>
+                </div><!-- /.widget-main -->
+            </div><!-- /.widget-body -->
+        </div><!-- /.widget-box -->
+    </div><!-- /.col -->
+    <div class="col-sm-6">
+        <div class="widget-box">
+
+            <div class="widget-header widget-header-flat widget-header-small">
+                <h5 class="widget-title">
+                    <i class="ace-icon fa fa-signal"></i>
+                    服务器CPU占用
+                </h5>
+
+                <div class="widget-toolbar no-border">
+                <span class="grey">
+                    <span style="font-size: 13px"></span>	<span class="fa fa-angle-double-up bigger-190 green" style="margin-top: 5px"></span>
+																&nbsp;
+															</span>
+                </div>
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main">
+                    <div id="piechart-placeholder"></div>
+
+                    <div class="hr hr8 hr-double"></div>
+
+                    <div class="clearfix">
+                        <div class="grid3">
+															<span class="grey">
+                                                                 服务器状态
+																<i class="fa fa-angle-double-up bigger-190 green" style="margin-left: 20px"></i>
+																&nbsp;
+															</span>
+                        </div>
+
+                        <div class="grid3">
+															<span class="grey">
+																<i class="ace-icon fa fa-twitter-square fa-2x purple"></i>
+																&nbsp; redis   版本 ： 4.0.1
+															</span>
+                        </div>
+
+                        <div class="grid3">
+															<span class="grey">
+																<i class="ace-icon fa fa-pinterest-square fa-2x red"></i>
+																&nbsp; db  MySQL
+															</span>
+                        </div>
+                    </div>
+                </div><!-- /.widget-main -->
+            </div><!-- /.widget-body -->
+        </div><!-- /.widget-box -->
+    </div><!-- /.col -->
+
+
+    <div class="col-xs-12 col-sm-12 widget-container-col" >
+        <div class="widget-box collapsed" >
+            <div class="widget-header widget-header-large">
+                <h4 class="widget-title">应用基本指标</h4>
+
+                <div class="widget-toolbar">
+
+                    <a  data-action="reload">
+                        <i class="ace-icon fa fa-refresh"></i>
+                    </a>
+
+                    <a  data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-down"></i>
+                    </a>
+
+                    <a  data-action="fullscreen" class="orange2">
+                        <i class="ace-icon fa fa-expand"></i>
+                    </a>
+                    <a  data-action="close">
+                        <i class="ace-icon fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main" style="background-color:#d9edf7;border-color:#bce8f1;color:#31708f;margin: 10px 10px 10px 10px ">
+                    <p ng-repeat = "(x,y) in metricsData">
+                        {{x}} : {{y}}
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 widget-container-col" >
+        <div class="widget-box collapsed" >
+            <div class="widget-header widget-header-large">
+                <h4 class="widget-title">环境变量</h4>
+
+                <div class="widget-toolbar">
+
+                    <a  data-action="reload">
+                        <i class="ace-icon fa fa-refresh"></i>
+                    </a>
+
+                    <a  data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-down"></i>
+                    </a>
+
+                    <a  data-action="fullscreen" class="orange2">
+                        <i class="ace-icon fa fa-expand"></i>
+                    </a>
+                    <a  data-action="close">
+                        <i class="ace-icon fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main" style="background-color:#d9edf7;border-color:#bce8f1;color:#31708f;margin: 10px 10px 10px 10px ">
+                    <p style="width:100%;overflow:hidden;display:block;" ng-repeat = "(x,y) in envInfo">
+                        {{x}} : {{y}}
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 widget-container-col" >
+        <div class="widget-box collapsed" >
+            <div class="widget-header widget-header-large">
+                <h4 class="widget-title">配置属性</h4>
+
+                <div class="widget-toolbar">
+
+                    <a  data-action="reload">
+                        <i class="ace-icon fa fa-refresh"></i>
+                    </a>
+
+                    <a  data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-down"></i>
+                    </a>
+
+                    <a  data-action="fullscreen" class="orange2">
+                        <i class="ace-icon fa fa-expand"></i>
+                    </a>
+                    <a  data-action="close">
+                        <i class="ace-icon fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main">
+                    <p class="alert alert-info">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 widget-container-col" >
+        <div class="widget-box collapsed" >
+            <div class="widget-header widget-header-large">
+                <h4 class="widget-title">应用基本指标</h4>
+
+                <div class="widget-toolbar">
+
+                    <a  data-action="reload">
+                        <i class="ace-icon fa fa-refresh"></i>
+                    </a>
+
+                    <a  data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-down"></i>
+                    </a>
+
+                    <a  data-action="fullscreen" class="orange2">
+                        <i class="ace-icon fa fa-expand"></i>
+                    </a>
+                    <a  data-action="close">
+                        <i class="ace-icon fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main">
+                    <p class="alert alert-info">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo massa sed ipsum porttitor facilisis.
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div><!-- /.row -->

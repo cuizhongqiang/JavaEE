@@ -1,0 +1,120 @@
+<div class="row">
+    <div class="col-md-12 col-xs-12">
+        <div class="page-header">
+            <h1>
+                用户权限分配
+            </h1>
+        </div><!-- /.page-header -->
+
+
+
+        <div class="row col-md-12" style="margin-left: 5px;margin-right: 5px">
+            <div class="col-md-16 col-xs-12 col-sm-3 center">
+
+
+                <span class="profile-picture">
+													<img id="avatar" class="editable img-responsive" alt="Alex's Avatar"
+                                                         src="assets/images/avatars/profile-pic.jpg"/>
+												</span>
+                <div class="space-4"></div>
+
+                <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+                    <div class="inline position-relative">
+                        <a href="#" class="user-title-label dropdown-toggle" data-toggle="dropdown">
+                            <i class="ace-icon fa fa-circle light-green"></i>
+                            &nbsp;
+                            <span class="white">Admin </span>
+                        </a>
+
+                        <ul class="align-left dropdown-menu dropdown-caret dropdown-lighter">
+                            <li class="dropdown-header"> Change Status</li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="ace-icon fa fa-circle green"></i>
+                                    &nbsp;
+                                    <span class="green">Available</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="ace-icon fa fa-circle red"></i>
+                                    &nbsp;
+                                    <span class="red">Busy</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="ace-icon fa fa-circle grey"></i>
+                                    &nbsp;
+                                    <span class="grey">Invisible</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top: 10px">
+                    <div class="profile-user-info profile-user-info-striped ">
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 用户名 </div>
+
+                            <div class="profile-info-value">
+                                <span class="editable" >{{userName}}</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 真实姓名 </div>
+
+                            <div class="profile-info-value">
+                                <span class="editable" >李坦</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 手机号 </div>
+
+                            <div class="profile-info-value">
+                                <span class="editable" >13661256434</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 邮箱 </div>
+
+                            <div class="profile-info-value">
+                                <span class="editable" >333333@qq.com</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name"> 拥有权限 </div>
+
+                            <div class="profile-info-value">
+                                <span class="editable" >{{adminPermission}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-md-6 col-xs-12 col-sm-3" id="treeview-checkable"></div>
+
+            <button ng-click= "save()" class="btn btn-xs btn-success pull-left">
+                <span class="bigger-120">保存权限</span>
+                <i class="ace-icon"></i>
+            </button>
+
+        </div>
+
+
+
+    </div><!-- /.col -->
+</div><!-- /.row -->
+
+
+

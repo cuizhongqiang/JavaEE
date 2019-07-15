@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.bootcss.com/angular.js/1.6.6/angular.min.js"></script>
+    <style type="text/css" media="screen">
+
+        table, th, td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #f1f1f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+		
+		thead, tfoot {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+            background-color: blue;
+			font-weight: bold;
+        }
+		
+		body{
+			font-size:12px;
+		}
+    </style>
+    <title>供应商主数据列表</title>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="springapis">
+    <table>
+        <thead>
+        <td>供应商编号</td>
+        <td>国家代码</td>
+        <td>供应商名称1</td>
+        <td>供应商名称2</td>
+        <td>供应商简称</td>
+        <td>省份编码</td>
+        <td>城市</td>
+        <td>邮政编码</td>
+        <td>详细地址</td>
+        <td>电话</td>
+        <td>传真号</td>
+        <td>税号</td>
+        <td>供应商账户组</td>
+        <td>创建日期</td>
+        <td>创建人</td>
+        </thead>
+        <!-- tr ng-repeat="x in apis">
+            <td>{{ x.className }}.{{ x.method }}()</td>
+            <td><a href="..{{ x.url }}">{{ x.url }}</a></td>
+            <td>{{ x.type }}</td>
+        </tr> -->
+        <tr ng-repeat="x in apis">
+            <td>{{ x.LIFNR }}</td>
+            <td>{{ x.LAND1 }}</td>
+            <td>{{ x.NAME1 }}</td>
+            <td>{{ x.NAME2 }}</td>
+            <td>{{ x.SORTL }}</td>
+            <td>{{ x.REGIO }}</td>
+            <td>{{ x.ORT01 }}</td>
+            <td>{{ x.PSTLZ }}</td>
+            <td>{{ x.STRAS }}</td>
+            <td>{{ x.TELF1 }}</td>
+            <td>{{ x.TELFX }}</td>
+            <td>{{ x.STCD1 }}</td>
+            <td>{{ x.KTOKK }}</td>
+            <td>{{ x.ERDAT }}</td>
+            <td>{{ x.ERNAM }}</td>
+        </tr>
+        <tfoot>
+			<td>供应商编号</td>
+			<td>国家代码</td>
+			<td>供应商名称1</td>
+			<td>供应商名称2</td>
+			<td>供应商简称</td>
+			<td>省份编码</td>
+			<td>城市</td>
+			<td>邮政编码</td>
+			<td>详细地址</td>
+			<td>电话</td>
+			<td>传真号</td>
+			<td>税号</td>
+			<td>供应商账户组</td>
+			<td>创建日期</td>
+			<td>创建人</td>
+        </tfoot>
+    </table>
+
+</div>
+
+<script>
+    var wsurl = "/health";
+    var app = angular.module('myApp', []);
+    app.controller('springapis', function ($scope, $http) {
+        $http.get(wsurl).then(function (result) {
+            console.log(JSON.stringify(result.data));
+            $scope.apis = result.data.RESULT;
+        });
+    });
+</script>
+</body>
+</html>

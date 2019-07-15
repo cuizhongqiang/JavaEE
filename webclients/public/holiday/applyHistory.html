@@ -1,0 +1,24 @@
+<div  ng-controller="applyHistoryCtrl" class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>申请上级</th>
+                    <th>请假天数/天</th>
+                    <th>请假原因</th>
+                    <th>审批结果</th></tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="x in obj">
+                    <td>{{x.employee}}</td>
+                    <td>{{x.nrOfHolidays}}</td>
+                    <td>{{x.description}}</td>
+                    <td>{{x.result}}</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

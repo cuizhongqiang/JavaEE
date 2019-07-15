@@ -1,0 +1,57 @@
+
+<div class="row" style="margin-top: 20px;margin-left: 20px">
+    <div class="col-xs-9">
+        <!-- PAGE CONTENT BEGINS -->
+        <h4 class="header green clearfix">
+            请假天数
+        </h4>
+
+        <form class="form-horizontal" role="form">
+            <!--<div class="form-group">-->
+
+                <!--<div class="col-sm-9">-->
+                    <!--<input  maxlength="5" placeholder="审批领导" onkeyup="value=value.replace(/[\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[\d]/g,''))"  ng-model = "employee" class="form-control"  />-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <input maxlength="5" placeholder="请假天数" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" ng-model="nrOfHolidays" class="form-control" id="inputPersional"  />
+                </div>
+            </div>
+
+
+            <h4 class="header green clearfix">
+                请假具体原因
+            </h4>
+
+            <!--<div class="wysiwyg-editor" id="editor1" ></div>-->
+            <!--<div class="col-sm-5" style="margin-top: 10px">-->
+
+            <div class="row">
+                <div class="col-sm-9">
+
+                    <div class="widget-box widget-color-green">
+                        <div class="widget-header widget-header-small">  </div>
+
+                        <div class="widget-body">
+                            <div class="widget-main no-padding">
+                                <div class="wysiwyg-editor" id="editor2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+
+        <button style="margin-top: 10px;" type="button" ng-click="submission()" class="btn btn-default">提交</button>
+        </div>
+
+    </div><!-- /.col -->
+</div><!-- /.row -->
+
+
+
+

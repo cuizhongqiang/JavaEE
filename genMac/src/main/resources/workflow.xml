@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wf>
+	<process id="wf_agentImport">
+		<className>com.cbmie.genMac.agent.entity.AgentImport</className>
+		<form>agent/agentImportForm</form>
+		<detail>agent/agentImport/detail</detail>
+	</process>
+	<process id="wf_domesticPurchase">
+		<className>com.cbmie.genMac.domesticTrade.entity.DomesticPurchase</className>
+		<form>domesticTrade/domesticPurchaseForm</form>
+		<detail>domesticTrade/domesticPurchase/detail</detail>
+	</process>
+	<process id="wf_agentPurchase">
+		<className>com.cbmie.genMac.domesticTrade.entity.AgentPurchase</className>
+		<form>domesticTrade/agentPurchaseForm</form>
+		<detail>domesticTrade/agentPurchase/detail</detail>
+	</process>
+	<process id="wf_openCredit">
+		<className>com.cbmie.genMac.credit.entity.OpenCredit</className>
+		<form>credit/openCreditApplyForm</form>
+		<detail>credit/openCredit/detail</detail>
+	</process>
+	<process id="wf_changeCredit">
+		<className>com.cbmie.genMac.credit.entity.ChangeCredit</className>
+		<form>credit/changeCreditForm</form>
+		<detail>credit/changeCredit/detail</detail>
+	</process>
+	<process id="wf_expense">
+		<className>com.cbmie.genMac.financial.entity.Expense</className>
+		<form>financial/expenseForm</form>
+		<detail>financial/expense/detail</detail>
+		<parameter key="money">
+			<type>N</type>
+			<value>10000</value>
+		</parameter>
+	</process>
+	<process id="wf_acceptance">
+		<className>com.cbmie.genMac.financial.entity.Acceptance</className>
+		<form>financial/acceptanceForm</form>
+		<detail>financial/acceptance/detail</detail>
+		<parameter key="money">
+			<type>N</type>
+			<value>10000</value>
+		</parameter>
+	</process>
+	<process id="wf_payTaxes">
+		<className>com.cbmie.genMac.financial.entity.PayTaxes</className>
+		<form>financial/payTaxesForm</form>
+		<detail>financial/payTaxes/detail</detail>
+	</process>
+	<process id="wf_importBilling">
+		<className>com.cbmie.genMac.financial.entity.ImportBilling</className>
+		<form>financial/importBillingForm</form>
+		<detail>financial/importBilling/detail</detail>
+	</process>
+	<process id="wf_freight">
+		<className>com.cbmie.genMac.logistics.entity.Freight</className>
+		<form>logistics/freightForm</form>
+		<detail>logistics/freight/detail</detail>
+	</process>
+	<process id="wf_sendGoods">
+		<className>com.cbmie.genMac.logistics.entity.SendGoods</className>
+		<form>logistics/sendGoodsForm</form>
+		<detail>logistics/sendGoods/detail</detail>
+	</process>
+	<process id="wf_enterpriseStock">
+		<className>com.cbmie.genMac.stock.entity.EnterpriseStockCheck</className>
+		<form>stock/enterpriseStockCheckForm</form>
+		<detail>stock/enterpriseStockCheck/detail</detail>
+	</process>
+	<process id="wf_logisticsCheck">
+		<className>com.cbmie.genMac.logistics.entity.LogisticsCheck</className>
+		<form>logistics/logisticsCheckForm</form>
+		<detail>logistics/logisticsCheck/detail</detail>
+	</process>
+	<process id="goods_h">
+		<className></className>
+		<form></form>
+		<detail></detail>
+		<parameter key="countersign">
+			<type>List</type>
+			<value>legaluser,leaderuser,financialuser</value>
+		</parameter>
+		<parameter key="rate">
+			<type>I</type>
+			<value>60</value>
+		</parameter>
+	</process>
+</wf>

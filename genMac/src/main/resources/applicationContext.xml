@@ -1,0 +1,203 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd"
+	default-lazy-init="true">
+
+	<description>Spring公共配置 </description>
+
+	<!-- 读取配置文件 -->
+	<context:property-placeholder
+		ignore-unresolvable="true" location="classpath*:/application.properties" />
+
+	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
+	<context:component-scan base-package="com.cbmie">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+
+	<!-- 定义Hibernate Session工厂 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="namingStrategy">
+			<bean class="org.hibernate.cfg.ImprovedNamingStrategy" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+				<prop key="hibernate.net.sf.ehcache.configurationResourceName">${hibernate.ehcache.configFile}</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="packagesToScan" value="com.cbmie" /><!-- 如果多个，用“,”分隔 -->
+	</bean>
+
+	<!-- 定义事务 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+	
+	<!-- 缓存配置 -->
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:${ehcache.configFile}" />
+	</bean>
+	
+	<!-- activiti configuration begin -->
+	<bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="databaseSchemaUpdate" value="true"/>
+        <property name="jobExecutorActivate" value="false"/>
+        <!--<property name="history" value="full"/>-->
+        <property name="processDefinitionCacheLimit" value="10"/>
+
+        <!-- mail -->
+        <property name="mailServerHost" value="localhost"/>
+        <property name="mailServerUsername" value="kafeitu"/>
+        <property name="mailServerPassword" value="000000"/>
+        <property name="mailServerPort" value="2025"/>
+        
+        <!-- UUID作为主键生成策略
+        <property name="idGenerator" ref="uuidGenerator" />
+        -->
+
+        <!-- 生成流程图的字体 -->
+        <property name="activityFontName" value="${diagram.activityFontName}"/>
+        <property name="labelFontName" value="${diagram.labelFontName}"/>
+
+        <!-- 缓存支持
+        <property name="processDefinitionCache">
+            <bean class="me.kafeitu.demo.activiti.util.cache.DistributedCache" />
+        </property>-->
+
+        <!-- 自动部署 -->
+        <property name="deploymentResources">
+            <list>
+                <value>classpath*:/deployments/*</value>
+            </list>
+        </property>
+
+        <!-- 自定义表单字段类型
+        <property name="customFormTypes">
+            <list>
+                <bean class="me.kafeitu.demo.activiti.activiti.form.UsersFormType"/>
+            </list>
+        </property>
+		 -->
+        <!-- JPA
+        <property name="jpaEntityManagerFactory" ref="entityManagerFactory" />
+        <property name="jpaHandleTransaction" value="false" />
+        <property name="jpaCloseEntityManager" value="false" />
+		 -->
+        <!-- 全局事件
+        <property name="typedEventListeners">
+            <map>
+                <entry key="VARIABLE_CREATED" >
+                    <list>
+                        <ref bean="variableCreateListener"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+         -->
+    </bean>
+
+	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+        <property name="processEngineConfiguration" ref="processEngineConfiguration"/>
+    </bean>
+
+    <bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService"/>
+    <bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService"/>
+    <bean id="formService" factory-bean="processEngine" factory-method="getFormService"/>
+    <bean id="identityService" factory-bean="processEngine" factory-method="getIdentityService"/>
+    <bean id="taskService" factory-bean="processEngine" factory-method="getTaskService"/>
+    <bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService"/>
+    <bean id="managementService" factory-bean="processEngine" factory-method="getManagementService"/>
+    
+    <!-- 监听器配置，流程配置文件中的expression来使用 -->
+    <bean id="goodsEndListener" class="com.cbmie.genMac.shop.listener.GoodsEndListener" />
+    <bean id="agentImportEndListener" class="com.cbmie.genMac.agent.listener.AgentImportEndListener" />
+    <bean id="changeCreditEndListener" class="com.cbmie.genMac.credit.listener.ChangeCreditEndListener" />
+    <bean id="openCreditEndListener" class="com.cbmie.genMac.credit.listener.OpenCreditEndListener" />
+	<bean id="expenseEndListener" class="com.cbmie.genMac.financial.listener.ExpenseEndListener" />
+	<bean id="acceptanceEndListener" class="com.cbmie.genMac.financial.listener.AcceptanceEndListener" />
+	<bean id="payTaxesEndListener" class="com.cbmie.genMac.financial.listener.PayTaxesEndListener" />
+	<bean id="importBillingEndListener" class="com.cbmie.genMac.financial.listener.ImportBillingEndListener" />
+	<bean id="freightEndListener" class="com.cbmie.genMac.logistics.listener.FreightEndListener" />
+	<bean id="sendGoodsEndListener" class="com.cbmie.genMac.logistics.listener.SendGoodsEndListener" />
+	<bean id="enterpriseStockCheckEndListener" class="com.cbmie.genMac.stock.listener.EnterpriseStockCheckEndListener" />
+	<bean id="logisticsCheckEndListener" class="com.cbmie.genMac.logistics.listener.LogisticsCheckEndListener" />
+	<!-- activiti configuration end -->
+
+	<!-- 配置 JSR303 Bean Validator 定义 -->
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
+	<!-- 数据源配置, 使用druid连接池 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="filters" value="mergeStat" />
+		<!-- 密码解密 -->
+		<!-- <property name="filters" value="config" /> <property name="connectionProperties" 
+			value="config.decrypt=true" /> -->
+		<!-- 申请连接的时候检测 -->
+		<property name="testWhileIdle" value="true"></property>
+		<!-- 检测连接 -->
+		<property name="validationQuery" value="select 'x'"></property>
+		<!--maxActive: 最大连接数量 -->
+		<property name="maxActive" value="${jdbc.pool.maxActive}" />
+		<!--initialSize: 初始化连接 -->
+		<property name="initialSize" value="${jdbc.pool.maxIdle}" />
+	</bean>
+
+	<!-- aop记录方法执行时间 -->
+	<!-- <aop:config> 拦截 service 包中的所有方法 <aop:advisor id="methodTimeLog" advice-ref="methodTimeAdvice" 
+		pointcut="execution(* *..service..*(..))"/> </aop:config> <bean id="methodTimeAdvice" 
+		class="com.cbmie.system.utils.MethodTimeAdvice"/> -->
+
+	<!-- 声明定时任务触发器工厂 -->
+	<bean id="scheduler" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="schedulerContextAsMap">
+			<map>
+				<!-- spring 管理的service需要放到这里，才能够注入成功 -->
+				<entry key="agentImportService" value-ref="agentImportService"/>
+				<entry key="informService" value-ref="informService"/>
+				<entry key="userService" value-ref="userService"/>
+				<entry key="affiBaseInfoService" value-ref="affiBaseInfoService"/>
+				<entry key="invoiceRegService" value-ref="invoiceRegService"/>
+			</map>
+		</property>
+		<property name="configLocation" value="classpath:quartz.properties" />
+		<!--applicationContextSchedulerContextKey： 是org.springframework.scheduling.quartz.SchedulerFactoryBean这个类中 
+			把spring上下 文以key/value的方式存放在了quartz的上下文中了， 可以用applicationContextSchedulerContextKey所定义的key得到对应的spring上下文 -->
+		<property name="applicationContextSchedulerContextKey" value="applicationContextKey" />
+	</bean>
+
+</beans>
