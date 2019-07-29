@@ -1,4 +1,4 @@
-package com.cbmie.lh.thread;
+package com.czq.thread;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.cnbmtech;
+package com.czq.thread;
 
 public class ThreadLocalTest {
 

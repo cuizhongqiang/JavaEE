@@ -1,4 +1,4 @@
-package com.cbmie.lh.thread;
+package com.czq.thread;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ public class CallableTest {
 
 		// 模拟需要并发的参数 也有可能是对象集合，String可以使用其他任意对象（包含集合对象）进行替换
 		List<String> params = new ArrayList<String>();
-		params.add("first");
+		params.add("First");
 		params.add("Second");
 		params.add("Third");
 		params.add("Forth");
