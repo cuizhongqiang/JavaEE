@@ -43,16 +43,6 @@ public class CallableTest {
 	}
 }
 
-Callable<Map<String, Object>> outCallable = new Callable<Map<String, Object>>() {
-	@Override
-	public Map<String, Object> call() throws Exception {
-		Map<String, Object> outActivity = activitiService.findDirectionActivity("out", approval);
-		return outActivity;
-	}
-};
-FutureTask<Map<String, Object>> outFutureTask = new FutureTask<>(outCallable);
-exec.submit(outFutureTask);
-
 /**
  * Created by Administrator on 2016/6/30.
  */
